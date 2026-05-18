@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="M Tech Manutenções Elétricas em Sorocaba. Instalações residenciais, comerciais e industriais de alta performance sob as normas NBR 5410 e NR 10. Faça um orçamento rápido.">
+    <title>M Tech | Manutenções e Instalações Elétricas em Sorocaba</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="main-header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">M <span class="logo-highlight">TECH</span></span>
+            </a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="#inicio" class="nav-link">Início</a>
+                <a href="#servicos" class="nav-link">Serviços</a>
+                <a href="#calculadora" class="nav-link">Simular Orçamento</a>
+                <a href="#sobre" class="nav-link">Sobre</a>
+                <a href="#contato" class="nav-link">Contato</a>
+            </nav>
+            
+            <a href="https://wa.me/5515998144211?text=Ol%C3%A1,%20M%20Tech!%20Gostaria%20de%20solicitar%20uma%20visita%20técnica." target="_blank" class="btn btn-primary btn-nav-cta">
+                Chamar no WhatsApp
+            </a>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- Section: Hero -->
+    <section id="inicio" class="hero-section">
+        <div class="hero-bg-glow"></div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="badge-tech">
+                    <span class="badge-icon">🛡️</span>
+                    <span class="badge-text">Conformidade Técnica NBR 5410 & NR 10</span>
+                </div>
+                <h1 class="hero-title">Instalações e Manutenções Elétricas de <span class="text-gradient">Alta Performance</span></h1>
+                <p class="hero-subtitle">Engenharia e execução com precisão técnica absoluta. Segurança, eficiência energética e soluções sob medida para residências, comércios e indústrias em Sorocaba e região.</p>
+                <div class="hero-actions">
+                    <a href="#calculadora" class="btn btn-primary">Simular Orçamento</a>
+                    <a href="https://wa.me/5515998144211?text=Ol%C3%A1,%20M%20Tech!%20Gostaria%20de%20agendar%20um%20serviço." target="_blank" class="btn btn-secondary">Conversar via WhatsApp</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Segurança</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">+100</span>
+                        <span class="stat-label">Projetos Executados</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24h</span>
+                        <span class="stat-label">Suporte de Emergência</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="card-glass hero-card">
+                    <div class="card-header">
+                        <div class="card-indicator"></div>
+                        <span class="card-title">M Tech | Status do Sistema</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="system-status">
+                            <span class="status-dot green"></span>
+                            <span class="status-text">Rede Elétrica: Normalizada</span>
+                        </div>
+                        <div class="progress-container">
+                            <span class="progress-label">Eficiência Energética</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 94%;"></div>
+                            </div>
+                            <span class="progress-val">94%</span>
+                        </div>
+                        <div class="logs-container">
+                            <div class="log-line">> Analisando balanceamento de fases... ok</div>
+                            <div class="log-line">> Verificando aterramento estrutural... ok</div>
+                            <div class="log-line">> Diagnóstico térmico de disjuntores: Sob controle</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Serviços -->
+    <section id="servicos" class="services-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Especialidades de <span class="text-gradient">Engenharia Elétrica</span></h2>
+                <p class="section-subtitle">Soluções inteligentes projetadas para atender às demandas de segurança e estabilidade energética com o mais alto nível técnico.</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Card 1: Residencial -->
+                <div class="card-glass service-card">
+                    <div class="service-icon-wrapper">
+                        <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="service-card-title">Residencial Premium</h3>
+                    <p class="service-card-desc">Instalações elétricas seguras e modernas para a sua família. Conforto térmico e otimização total de iluminação e potência.</p>
+                    <ul class="service-features">
+                        <li>Substituição completa de fiações antigas</li>
+                        <li>Montagem e modernização de quadros (QDC)</li>
+                        <li>Projeto de iluminação em LED e lustres</li>
+                        <li>Chuveiros de alta potência e tomadas dedicadas</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Comercial -->
+                <div class="card-glass service-card highlight-border">
+                    <div class="service-icon-wrapper">
+                        <svg class="service-icon color-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="service-card-title">Comercial & Negócios</h3>
+                    <p class="service-card-desc">Infraestrutura robusta de energia para empresas. Minimize paradas e previna falhas em equipamentos críticos de trabalho.</p>
+                    <ul class="service-features">
+                        <li>Infraestrutura com eletrocalhas e perfilados</li>
+                        <li>Adequação e balanceamento de cargas trifásicas</li>
+                        <li>Iluminação cênica e comercial planejada</li>
+                        <li>Manutenção preventiva em quadros elétricos</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Predial & Industrial -->
+                <div class="card-glass service-card">
+                    <div class="service-icon-wrapper">
+                        <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="service-card-title">Predial & Segurança</h3>
+                    <p class="service-card-desc">Sistemas complexos de proteção e distribuição de energia de alta escala para condomínios e galpões.</p>
+                    <ul class="service-features">
+                        <li>Manutenção preventiva e laudo de SPDA</li>
+                        <li>Sistemas de aterramento e proteção contra surtos (DPS)</li>
+                        <li>Adequação técnica de padrão de entrada de energia</li>
+                        <li>Upgrade de potência contratada junto à concessionária</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Calculadora Interativa -->
+    <section id="calculadora" class="calculator-section">
+        <div class="calculator-glow"></div>
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Calculadora de <span class="text-gradient">Orçamento Inteligente</span></h2>
+                <p class="section-subtitle">Selecione os requisitos do seu imóvel e as necessidades para gerar uma estimativa de complexidade técnica e prazo.</p>
+            </div>
+            
+            <div class="calculator-box card-glass">
+                <div class="calculator-steps">
+                    <!-- Step 1: Tipo Imóvel -->
+                    <div class="calc-step-group">
+                        <label class="calc-step-label">1. Escolha o Tipo de Imóvel</label>
+                        <div class="property-types">
+                            <button type="button" class="property-btn active" data-type="residencial">
+                                <span class="btn-icon">🏠</span>
+                                <span class="btn-text">Residencial</span>
+                            </button>
+                            <button type="button" class="property-btn" data-type="comercial">
+                                <span class="btn-icon">🏢</span>
+                                <span class="btn-text">Comercial</span>
+                            </button>
+                            <button type="button" class="property-btn" data-type="predial">
+                                <span class="btn-icon">🏗️</span>
+                                <span class="btn-text">Predial / Galpão</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Serviços -->
+                    <div class="calc-step-group">
+                        <label class="calc-step-label">2. Selecione os Serviços Necessários</label>
+                        <div class="services-selection-list" id="servicesChecklist">
+                            <!-- JS will populate the items here depending on the selected type -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Resultados e Resumo (Sidebar da Calculadora) -->
+                <div class="calculator-summary">
+                    <h3 class="summary-title">Resumo Técnico</h3>
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Tipo de Projeto:</span>
+                            <strong id="summaryPropertyType">Residencial</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Serviços Selecionados:</span>
+                            <strong id="summaryCount">0 itens</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="metrics-card">
+                        <div class="metric-block">
+                            <span class="metric-label">Complexidade Técnica</span>
+                            <span class="metric-value color-green" id="complexityValue">Baixa</span>
+                        </div>
+                        <div class="metric-block">
+                            <span class="metric-label">Prazo Médio Estimado</span>
+                            <span class="metric-value" id="timeValue">1 dia útil</span>
+                        </div>
+                        <div class="metric-block price-block">
+                            <span class="metric-label">Estimativa Mínima de Mão de Obra</span>
+                            <span class="metric-value text-gradient" id="priceValue">R$ 150,00</span>
+                        </div>
+                    </div>
+                    
+                    <p class="summary-disclaimer">O valor final pode variar após a inspeção técnica de segurança no local.</p>
+                    
+                    <button class="btn btn-primary btn-full-width" id="btnSendWhatsApp">
+                        Confirmar e Enviar para o WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Sobre Nós / Diferenciais -->
+    <section id="sobre" class="about-section">
+        <div class="container about-container">
+            <div class="about-visual">
+                <div class="grid-images">
+                    <div class="glass-photo-frame">
+                        <span class="frame-tag">Qualidade Técnica</span>
+                        <div class="frame-content">
+                            <p class="big-number">100%</p>
+                            <p class="big-desc">Dentro das normas de segurança brasileiras (ABNT).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-content">
+                <h2 class="section-title">Compromisso com a <span class="text-gradient">Segurança e Rigor Técnico</span></h2>
+                <p class="about-text">Na M Tech, entendemos que a infraestrutura elétrica é o coração da sua segurança e produtividade. Trabalhamos exclusivamente sob as diretrizes das normas NBR 5410 (Instalações Elétricas de Baixa Tensão) e NR 10 (Segurança em Instalações e Serviços em Eletricidade).</p>
+                <p class="about-text">Utilizamos ferramentas de medição de altíssima precisão e materiais certificados para garantir que cada circuito esteja perfeitamente balanceado, prevenindo fugas de corrente, curtos-circuitos e surtos que danificam aparelhos eletrônicos.</p>
+                
+                <div class="diferenciais-list">
+                    <div class="diferencial-item">
+                        <div class="diff-icon">✓</div>
+                        <div>
+                            <h4>Ferramental de Ponta</h4>
+                            <p>Testes térmicos com termografia para detectar aquecimentos antes que virem curtos.</p>
+                        </div>
+                    </div>
+                    <div class="diferencial-item">
+                        <div class="diff-icon">✓</div>
+                        <div>
+                            <h4>Organização e Limpeza</h4>
+                            <p>Execução cirúrgica da obra com ambiente limpo e mínimo impacto na sua rotina.</p>
+                        </div>
+                    </div>
+                    <div class="diferencial-item">
+                        <div class="diff-icon">✓</div>
+                        <div>
+                            <h4>Relatórios de Execução</h4>
+                            <p>Entregamos o mapeamento dos circuitos atualizado para futuras manutenções.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Contato / Footer -->
+    <section id="contato" class="contact-section">
+        <div class="container contact-container">
+            <div class="contact-card card-glass">
+                <h3>Vamos iniciar o seu projeto?</h3>
+                <p>Entre em contato diretamente conosco para agendar visitas técnicas rápidas ou tirar dúvidas sobre problemas elétricos urgentes.</p>
+                
+                <div class="contact-links">
+                    <a href="tel:+5515998144211" class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <div>
+                            <span class="contact-label">Ligue agora</span>
+                            <span class="contact-data">(15) 99814-4211</span>
+                        </div>
+                    </a>
+                    <a href="mailto:mtech.manut@gmail.com" class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <div>
+                            <span class="contact-label">E-mail Comercial</span>
+                            <span class="contact-data">mtech.manut@gmail.com</span>
+                        </div>
+                    </a>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div>
+                            <span class="contact-label">Sede e Atendimento</span>
+                            <span class="contact-data">Sorocaba, SP e Região</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="instagram-cta card-glass">
+                <h3>Acompanhe nosso trabalho</h3>
+                <p>Postamos projetos reais de engenharia elétrica, quadros de distribuição limpos e dicas de economia de energia no Instagram.</p>
+                <a href="https://www.instagram.com/mtech.manut" target="_blank" class="btn btn-secondary instagram-btn">
+                    Seguir @mtech.manut
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Geral -->
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <p>&copy; 2026 M Tech Manutenções Elétricas. Todos os direitos reservados.</p>
+            <p class="footer-norms">Projetos em conformidade com as normas ABNT NBR 5410 e NR 10.</p>
+        </div>
+    </footer>
+
+    <!-- Botão de WhatsApp Flutuante -->
+    <a href="https://wa.me/5515998144211?text=Ol%C3%A1,%20M%20Tech!%20Gostaria%20de%20um%20orçamento." class="whatsapp-floating" target="_blank" aria-label="Falar no WhatsApp">
+        <svg viewBox="0 0 32 32" class="whatsapp-svg" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825.733 5.48 2.01 7.788l-2.01 7.348 7.525-1.975c2.247 1.196 4.8 1.875 7.475 1.875 8.837 0 16-7.163 16-16s-7.163-16-16-16zm8.868 22.842c-.378 1.066-1.848 1.956-2.932 2.083-.75.088-1.727.158-2.793-.183-1.067-.34-2.457-.962-4.148-1.688-7.228-3.102-11.89-10.456-12.253-10.941-.362-.486-2.883-3.832-2.883-7.311 0-3.48 1.815-5.187 2.457-5.827.643-.64 1.436-.8 1.916-.8.48 0 .963.003 1.38.022.434.02.993-.162 1.554 1.187.576 1.385 1.968 4.795 2.138 5.15.17.355.285.767.05 1.238-.232.47-.348.767-.692 1.168-.344.402-.724.896-1.034 1.206-.345.342-.705.715-.304 1.405.4.69 1.776 2.923 3.81 4.733 2.62 2.33 4.82 3.05 5.5 3.336.68.286 1.08.237 1.482-.23.4-.47 1.716-1.996 2.172-2.678.455-.68.91-.57 1.53-.34 1.353.488 4.544 2.146 4.908 2.327.363.18.605.27.69.417.087.147.087.854-.29 1.92z"/>
+        </svg>
+    </a>
+
+    <!-- JS Logic -->
+    <script src="index.js"></script>
+</body>
+</html>
