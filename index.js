@@ -3,7 +3,7 @@
    -------------------------------------------------- */
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // 1. Header Scroll Effect
     const header = document.querySelector('.main-header');
     window.addEventListener('scroll', () => {
@@ -82,14 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderServices() {
         servicesChecklist.innerHTML = '';
         const services = servicesDatabase[currentPropertyType];
-        
+
         services.forEach(service => {
             const isChecked = selectedServices.has(service.id);
-            
+
             const card = document.createElement('div');
             card.className = `service-item-checkbox ${isChecked ? 'checked' : ''}`;
             card.dataset.id = service.id;
-            
+
             card.innerHTML = `
                 <input type="checkbox" class="checkbox-input" id="${service.id}" ${isChecked ? 'checked' : ''}>
                 <div class="service-checkbox-details">
@@ -97,12 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="service-checkbox-desc">${service.desc}</span>
                 </div>
             `;
-            
+
             // Toggle selection on click
             card.addEventListener('click', (e) => {
                 // Prevent trigger twice if clicked directly on input element
                 if (e.target.tagName === 'INPUT') return;
-                
+
                 const checkbox = card.querySelector('input');
                 checkbox.checked = !checkbox.checked;
                 handleSelectionChange(service.id, checkbox.checked, card);
@@ -193,14 +193,14 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             // Remove active class from all
             propertyBtns.forEach(b => b.classList.remove('active'));
-            
+
             // Mark current active
             btn.classList.add('active');
             currentPropertyType = btn.dataset.type;
-            
+
             // Clear selections when switching main category
             selectedServices.clear();
-            
+
             // Redraw Services
             renderServices();
         });
@@ -243,8 +243,8 @@ Aguardo o retorno para agendarmos a visita e formalizarmos o orçamento!`;
 
         // Encode URI and open tab
         const encodedMessage = encodeURIComponent(messageText);
-        const whatsappUrl = `https://wa.me/5515998144211?text=${encodedMessage}`;
-        
+        const whatsappUrl = `https://wa.me/5515997965034?text=${encodedMessage}`;
+
         window.open(whatsappUrl, '_blank');
     });
 
