@@ -113,7 +113,7 @@ Responda em formato JSON válido:
                 attachments: [
                     {
                         filename: foto.name || 'foto_quadro.jpg',
-                        content: buffer
+                        content: Buffer.from(buffer)
                     }
                 ]
             });
