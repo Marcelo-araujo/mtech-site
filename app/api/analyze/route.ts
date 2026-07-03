@@ -19,9 +19,11 @@ export async function POST(req: NextRequest) {
         const tipo_imovel = formData.get('tipo_imovel') as string;
         const urgencia = formData.get('urgencia') as string;
         const problema = formData.get('problema') as string;
+        const whatsapp = formData.get('whatsapp') as string;
+        const email = formData.get('email') as string;
         const foto = formData.get('foto') as File;
 
-        if (!nome || !foto || !problema) {
+        if (!nome || !foto || !problema || !whatsapp) {
             return NextResponse.json({ error: "Dados incompletos" }, { status: 400 });
         }
 
@@ -100,6 +102,8 @@ Responda em formato JSON válido:
                 </div>
                 <h3>Dados Informados:</h3>
                 <ul>
+                    <li><strong>WhatsApp:</strong> <span style="font-size: 1.1em; color: #25D366; font-weight: bold;">${whatsapp}</span></li>
+                    ${email ? `<li><strong>E-mail:</strong> ${email}</li>` : ''}
                     <li><strong>Local:</strong> ${local}</li>
                     <li><strong>Tipo de Imóvel:</strong> ${tipo_imovel}</li>
                     <li><strong>Criticidade:</strong> ${urgencia}</li>

@@ -68,7 +68,8 @@ export default function TriagemForm() {
                                 <p className="mb-2 font-bold text-blue-400">Classificação: {resultado.classificacao_ia}</p>
                                 <div className="text-gray-300" dangerouslySetInnerHTML={{__html: resultado.resumo_ia?.replace(/\n/g, '<br/>') || ''}}></div>
                             </div>
-                            <Link href="/" className="btn btn-primary">Voltar para o site</Link>
+                            <p className="mb-6 text-green-400 font-semibold">Nossa equipe de engenharia recebeu sua triagem e entrará em contato pelo WhatsApp em breve!</p>
+                            <Link href="/" className="btn btn-primary">Voltar para a Página Inicial</Link>
                         </div>
                     ) : (
                         <form onSubmit={handleSubmit} className="space-y-6">
@@ -82,6 +83,18 @@ export default function TriagemForm() {
                                 <div>
                                     <label className="block text-sm font-semibold mb-2">Local (Bairro/Cidade)</label>
                                     <input type="text" name="local" required className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:border-blue-500 outline-none transition-colors" placeholder="Ex: Sorocaba - Centro" />
+                                </div>
+                            </div>
+                            
+                            {/* Contato */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label className="block text-sm font-semibold mb-2">WhatsApp (Obrigatório)</label>
+                                    <input type="tel" name="whatsapp" required className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:border-blue-500 outline-none transition-colors" placeholder="(00) 00000-0000" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-semibold mb-2">E-mail (Opcional)</label>
+                                    <input type="email" name="email" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:border-blue-500 outline-none transition-colors" placeholder="seu@email.com" />
                                 </div>
                             </div>
 
