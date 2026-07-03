@@ -66,7 +66,7 @@ export default function TriagemForm() {
                             <h2 className="text-2xl font-bold mb-4">Análise Concluída</h2>
                             <div className="bg-white/5 p-6 rounded-lg mb-6 text-left">
                                 <p className="mb-2 font-bold text-blue-400">Classificação: {resultado.classificacao_ia}</p>
-                                <div className="text-gray-300" dangerouslySetInnerHTML={{__html: resultado.resumo_ia?.replace(/\n/g, '<br/>')}}></div>
+                                <div className="text-gray-300" dangerouslySetInnerHTML={{__html: resultado.resumo_ia?.replace(/\n/g, '<br/>') || ''}}></div>
                             </div>
                             <Link href="/" className="btn btn-primary">Voltar para o site</Link>
                         </div>
