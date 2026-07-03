@@ -2,13 +2,15 @@ import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { Resend } from 'resend';
 
-// Inicializar clientes
-const resend = new Resend(process.env.RESEND_API_KEY);
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Removidas instâncias globais para evitar erro no build
 
 export async function POST(req: NextRequest) {
+    // Inicializar clientes dentro da requisição
+    const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+    const openai = process.env.OPENAI_API_KEY ? new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    }) : null;
+    
     try {
         const formData = await req.formData();
         
@@ -56,7 +58,7 @@ Responda em formato JSON válido:
 }
 `;
 
-            const response = await openai.chat.completions.create({
+            const response = await openai!.chat.completions.create({
                 model: "gpt-4o-mini",
                 messages: [
                     {
@@ -105,7 +107,7 @@ Responda em formato JSON válido:
                 <p>A foto enviada pelo cliente está em anexo neste e-mail.</p>
             `;
 
-            await resend.emails.send({
+            await resend!.emails.send({
                 from: 'Triagem M Tech <onboarding@resend.dev>', // Em produção, altere para seu domínio verificado
                 to: [process.env.MTECH_EMAIL_RECEIVER],
                 subject: `[${aiClassification}] Novo Diagnóstico - ${nome}`,
