@@ -51,7 +51,7 @@ Dados do Lead:
 Protocolo de Rejeição Automática:
 - Qualidade da Imagem: Se a imagem estiver fora de foco (borrada), mal iluminada ou com baixa resolução que impeça a identificação técnica do quadro elétrico, retorne REJEITAR: 'Foto de baixa qualidade'.
 - Relevância da Imagem: Se a imagem não contiver componentes elétricos (fotos de tetos, pisos, objetos irrelevantes ou contexto aleatório), retorne REJEITAR: 'Conteúdo irrelevante'.
-- Consistência do Escopo: Se a descrição do problema for vaga, contraditória com a foto ou demonstrar falta de seriedade/inconsistência técnica, retorne REJEITAR: 'Solicitação inconsistente'.
+- Consistência do Escopo e Detalhamento: A descrição do problema deve apresentar contexto real e ser compatível com a foto enviada. Se o texto inserido pelo cliente for demasiadamente curto ou soar muito genérico (ex: "parou de funcionar", "quebrou", "fio solto"), retorne REJEITAR. Sempre que rejeitar por esse motivo de falta de contexto, inicie o resumo com: "O seu tipo de solicitação não pode ser atendido no formato enviado. Precisamos de um contexto descritivo claro sobre o problema e sua relação com a foto anexada."
 - O "Não" Silencioso: Sempre que retornar REJEITAR por um dos motivos acima, coloque como o primeiro item do resumo a mensagem exata: "Para manter o padrão de segurança e conformidade técnica (NBR 5410), não conseguimos processar orçamentos sem as informações completas e fotos do local conforme solicitado. Caso tenha os dados completos, ficaremos felizes em analisar uma nova solicitação".
 - Cliente que deseja "Apenas o orçamento mais barato": retorne REJEITAR e no resumo alerte que a empresa não atende orçamentos baseados apenas em preço sem critério técnico.
 
