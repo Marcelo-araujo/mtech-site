@@ -1,12 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
 import OpenAI from 'openai';
+import { Resend } from 'resend';
 
 // Inicializar clientes
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseKey);
-
+const resend = new Resend(process.env.RESEND_API_KEY);
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -26,28 +23,12 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Dados incompletos" }, { status: 400 });
         }
 
-        // 1. Converter imagem para Base64 para a OpenAI
+        // 1. Converter imagem para Base64 para OpenAI e para o anexo do E-mail
         const buffer = await foto.arrayBuffer();
         const base64Image = Buffer.from(buffer).toString('base64');
         const mimeType = foto.type;
 
-        // 2. Upload para o Supabase Storage (Opcional caso dê erro, mas tentamos)
-        let publicFotoUrl = null;
-        if (supabaseUrl && supabaseKey) {
-            const fileName = `${Date.now()}_${foto.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
-            const { data: uploadData, error: uploadError } = await supabase.storage
-                .from('fotos_triagem')
-                .upload(fileName, buffer, { contentType: mimeType });
-            
-            if (!uploadError) {
-                const { data } = supabase.storage.from('fotos_triagem').getPublicUrl(fileName);
-                publicFotoUrl = data.publicUrl;
-            } else {
-                console.warn("Erro no upload do Supabase:", uploadError);
-            }
-        }
-
-        // 3. Chamada para OpenAI
+        // 2. Chamada para OpenAI
         let aiClassification = "AGENDAR VISITA";
         let aiSummary = "Resumo indisponível (Erro na IA)";
 
@@ -64,9 +45,9 @@ Dados do Lead:
 - Problema descrito: ${problema}
 
 Regras rigorosas:
-1. Se o cliente mencionou urgência "Apenas o orçamento mais barato", você DEVE classificar como "REJEITAR".
-2. Se o problema é complexo, rentável e requer análise técnica no local (ex: curto-circuito grave, troca de fiação completa, laudos de SPDA), classifique como "AGENDAR VISITA".
-3. Se o escopo é muito claro, padronizado e a imagem comprova (ex: troca de chuveiro, instalação de quadro elétrico simples), classifique como "PRÉ-APROVADO".
+1. Se o cliente mencionou urgência "Apenas o orçamento mais barato", classifique como "REJEITAR".
+2. Se o problema é complexo, rentável e requer análise técnica no local, classifique como "AGENDAR VISITA".
+3. Se o escopo é muito claro, padronizado e a imagem comprova, classifique como "PRÉ-APROVADO".
 
 Responda em formato JSON válido:
 {
@@ -102,25 +83,43 @@ Responda em formato JSON válido:
                 aiSummary = parsed.resumo_bullet_points;
             }
         } else {
-            console.warn("OPENAI_API_KEY não configurada. Simulando resposta.");
-            aiSummary = "<ul><li>Falta chave da API da OpenAI.</li><li>Simulação ativada.</li></ul>";
+            console.warn("OPENAI_API_KEY não configurada.");
+            aiSummary = "<ul><li>Falta chave da API da OpenAI.</li></ul>";
         }
 
-        // 4. Salvar no Banco de Dados Supabase
-        if (supabaseUrl && supabaseKey) {
-            await supabase.from('leads').insert([{
-                nome,
-                local,
-                tipo_imovel,
-                urgencia,
-                problema,
-                classificacao_ia: aiClassification,
-                resumo_ia: aiSummary,
-                foto_url: publicFotoUrl
-            }]);
+        // 3. Disparar E-mail com Resend
+        if (process.env.RESEND_API_KEY && process.env.MTECH_EMAIL_RECEIVER) {
+            const emailHtml = `
+                <h2>Novo Lead de Triagem: ${nome}</h2>
+                <div style="padding: 15px; border-left: 4px solid #0066FF; background: #f4f4f4; margin-bottom: 20px;">
+                    <h3 style="margin-top: 0;">Veredito da IA: [${aiClassification}]</h3>
+                    ${aiSummary}
+                </div>
+                <h3>Dados Informados:</h3>
+                <ul>
+                    <li><strong>Local:</strong> ${local}</li>
+                    <li><strong>Tipo de Imóvel:</strong> ${tipo_imovel}</li>
+                    <li><strong>Criticidade:</strong> ${urgencia}</li>
+                    <li><strong>Problema Relatado:</strong> ${problema}</li>
+                </ul>
+                <p>A foto enviada pelo cliente está em anexo neste e-mail.</p>
+            `;
+
+            await resend.emails.send({
+                from: 'Triagem M Tech <onboarding@resend.dev>', // Em produção, altere para seu domínio verificado
+                to: [process.env.MTECH_EMAIL_RECEIVER],
+                subject: `[${aiClassification}] Novo Diagnóstico - ${nome}`,
+                html: emailHtml,
+                attachments: [
+                    {
+                        filename: foto.name || 'foto_quadro.jpg',
+                        content: buffer
+                    }
+                ]
+            });
         }
 
-        // 5. Retornar resposta
+        // 4. Retornar resposta para o frontend
         return NextResponse.json({
             status: 'success',
             classificacao_ia: aiClassification,
