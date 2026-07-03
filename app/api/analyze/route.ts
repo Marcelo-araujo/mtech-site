@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import { GoogleGenAI } from '@google/genai';
 import { Resend } from 'resend';
 
 // Removidas instâncias globais para evitar erro no build
@@ -7,8 +7,8 @@ import { Resend } from 'resend';
 export async function POST(req: NextRequest) {
     // Inicializar clientes dentro da requisição
     const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
-    const openai = process.env.OPENAI_API_KEY ? new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
+    const ai = process.env.GEMINI_API_KEY ? new GoogleGenAI({
+      apiKey: process.env.GEMINI_API_KEY,
     }) : null;
     
     try {
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
         let aiClassification = "AGENDAR VISITA";
         let aiSummary = "Resumo indisponível (Erro na IA)";
 
-        if (process.env.OPENAI_API_KEY) {
+        if (process.env.GEMINI_API_KEY) {
             const promptContext = `
 Você é o engenheiro chefe de triagem da M Tech, uma empresa de engenharia elétrica de alto padrão.
 Analise a seguinte solicitação de serviço e a imagem enviada.
@@ -58,35 +58,36 @@ Responda em formato JSON válido:
 }
 `;
 
-            const response = await openai!.chat.completions.create({
-                model: "gpt-4o-mini",
-                messages: [
+            const response = await ai!.models.generateContent({
+                model: "gemini-2.5-flash",
+                contents: [
                     {
                         role: "user",
-                        content: [
-                            { type: "text", text: promptContext },
+                        parts: [
+                            { text: promptContext },
                             {
-                                type: "image_url",
-                                image_url: {
-                                    url: `data:${mimeType};base64,${base64Image}`,
-                                    detail: "low"
+                                inlineData: {
+                                    mimeType: mimeType,
+                                    data: base64Image
                                 }
                             }
                         ]
                     }
                 ],
-                response_format: { type: "json_object" }
+                config: {
+                    responseMimeType: "application/json"
+                }
             });
 
-            const content = response.choices?.[0]?.message?.content;
+            const content = response.text;
             if (content) {
                 const parsed = JSON.parse(content);
                 aiClassification = parsed.classificacao;
                 aiSummary = parsed.resumo_bullet_points;
             }
         } else {
-            console.warn("OPENAI_API_KEY não configurada.");
-            aiSummary = "<ul><li>Falta chave da API da OpenAI.</li></ul>";
+            console.warn("GEMINI_API_KEY não configurada.");
+            aiSummary = "<ul><li>Falta chave da API do Gemini.</li></ul>";
         }
 
         // 3. Disparar E-mail com Resend
