@@ -48,10 +48,15 @@ Dados do Lead:
 - Urgência declarada: ${urgencia}
 - Problema descrito: ${problema}
 
-Regras rigorosas:
-1. Se o cliente mencionou urgência "Apenas o orçamento mais barato", classifique como "REJEITAR".
-2. Se o problema é complexo, rentável e requer análise técnica no local, classifique como "AGENDAR VISITA".
-3. Se o escopo é muito claro, padronizado e a imagem comprova, classifique como "PRÉ-APROVADO".
+Protocolo de Rejeição Automática:
+- Qualidade da Imagem: Se a imagem estiver fora de foco (borrada), mal iluminada ou com baixa resolução que impeça a identificação técnica do quadro elétrico, retorne REJEITAR: 'Foto de baixa qualidade'.
+- Relevância da Imagem: Se a imagem não contiver componentes elétricos (fotos de tetos, pisos, objetos irrelevantes ou contexto aleatório), retorne REJEITAR: 'Conteúdo irrelevante'.
+- Consistência do Escopo: Se a descrição do problema for vaga, contraditória com a foto ou demonstrar falta de seriedade/inconsistência técnica, retorne REJEITAR: 'Solicitação inconsistente'.
+- O "Não" Silencioso: Sempre que retornar REJEITAR por um dos motivos acima, coloque como o primeiro item do resumo a mensagem exata: "Para manter o padrão de segurança e conformidade técnica (NBR 5410), não conseguimos processar orçamentos sem as informações completas e fotos do local conforme solicitado. Caso tenha os dados completos, ficaremos felizes em analisar uma nova solicitação".
+- Cliente que deseja "Apenas o orçamento mais barato": retorne REJEITAR e no resumo alerte que a empresa não atende orçamentos baseados apenas em preço sem critério técnico.
+
+Protocolo de Aceitação:
+- Apenas se a imagem for clara, relevante (mostrando quadro/infraestrutura) e a descrição for coerente, classifique como PRÉ-APROVADO ou AGENDAR VISITA.
 
 Responda em formato JSON válido:
 {
