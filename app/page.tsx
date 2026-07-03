@@ -34,6 +34,8 @@ export default function Home() {
     // Calculator State
     const [propertyType, setPropertyType] = useState('residencial');
     const [selectedServices, setSelectedServices] = useState<Set<string>>(new Set());
+    const [perfilAtendimento, setPerfilAtendimento] = useState('');
+    const [desqualificadoHome, setDesqualificadoHome] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -97,13 +99,7 @@ export default function Home() {
         }
     }
 
-    const formattedPrice = count > 0 ? `R$ ${totalPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : 'R$ 0,00';
     const typeLabel = propertyType.charAt(0).toUpperCase() + propertyType.slice(1);
-
-    const sendWhatsApp = () => {
-        // Redireciona para o formulário de triagem ao invés do WhatsApp direto
-        window.location.href = '/triagem';
-    };
 
     return (
         <main>
@@ -300,6 +296,45 @@ export default function Home() {
                                     ))}
                                 </div>
                             </div>
+                            
+                            <div className="calc-step-group" style={{ marginTop: '24px' }}>
+                                <label className="calc-step-label">3. Qual a sua prioridade técnica?</label>
+                                <div style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                    <label className="flex items-start gap-3 cursor-pointer p-3 border border-white/10 rounded-lg hover:border-blue-500/50 bg-white/5 transition-colors">
+                                        <input 
+                                            type="radio" 
+                                            name="perfil_atendimento" 
+                                            value="seguranca" 
+                                            checked={perfilAtendimento === 'seguranca'}
+                                            onChange={() => { setPerfilAtendimento('seguranca'); setDesqualificadoHome(false); }}
+                                            className="mt-1 w-5 h-5 accent-blue-600 bg-transparent border-gray-600 rounded-full cursor-pointer" 
+                                        />
+                                        <div className="flex-1">
+                                            <span className="block text-sm font-semibold text-white">Segurança e Normas (NBR 5410)</span>
+                                            <span className="block text-xs text-gray-400 mt-1">Busco uma execução segura, profissional e duradoura.</span>
+                                        </div>
+                                    </label>
+                                    <label className="flex items-start gap-3 cursor-pointer p-3 border border-white/10 rounded-lg hover:border-red-500/50 bg-white/5 transition-colors">
+                                        <input 
+                                            type="radio" 
+                                            name="perfil_atendimento" 
+                                            value="barato" 
+                                            checked={perfilAtendimento === 'barato'}
+                                            onChange={() => { setPerfilAtendimento('barato'); setDesqualificadoHome(true); }}
+                                            className="mt-1 w-5 h-5 accent-red-600 bg-transparent border-gray-600 rounded-full cursor-pointer" 
+                                        />
+                                        <div className="flex-1">
+                                            <span className="block text-sm font-semibold text-white">Apenas o Orçamento Mais Barato</span>
+                                            <span className="block text-xs text-gray-400 mt-1">Não me importo com certificações, quero apenas resolver pelo menor preço.</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                {desqualificadoHome && (
+                                    <div className="mt-4 p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-center font-medium text-sm">
+                                        <p>No momento, não atendemos o mercado focado apenas em menor preço. Valorizamos a execução técnica sob as normas de segurança ABNT.</p>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                         
                         <div className="calculator-summary">
@@ -328,7 +363,7 @@ export default function Home() {
                             
                             <p className="summary-disclaimer text-gray-400 mb-4">Para validar esta estimativa técnica e garantir nossa disponibilidade de agenda, preencha o formulário de diagnóstico clicando abaixo.</p>
                             
-                            <Link href="/triagem" className={`btn btn-primary btn-full-width py-4 flex items-center justify-center text-center ${count === 0 ? 'opacity-50 pointer-events-none' : ''}`}>
+                            <Link href="/triagem" className={`btn btn-primary btn-full-width py-4 flex items-center justify-center text-center ${count === 0 || desqualificadoHome || !perfilAtendimento ? 'opacity-50 pointer-events-none' : ''}`}>
                                 Iniciar Diagnóstico Inicial (Requerido)
                             </Link>
                         </div>

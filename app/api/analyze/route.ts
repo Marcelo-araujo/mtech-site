@@ -78,7 +78,7 @@ Responda em formato JSON válido:
                 response_format: { type: "json_object" }
             });
 
-            const content = response.choices[0].message.content;
+            const content = response.choices?.[0]?.message?.content;
             if (content) {
                 const parsed = JSON.parse(content);
                 aiClassification = parsed.classificacao;
@@ -128,8 +128,9 @@ Responda em formato JSON válido:
             resumo_ia: aiSummary
         });
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Erro na API /analyze:", error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        const errorMessage = error instanceof Error ? error.message : "Ocorreu um erro desconhecido";
+        return NextResponse.json({ error: errorMessage }, { status: 500 });
     }
 }

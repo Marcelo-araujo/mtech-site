@@ -1,19 +1,23 @@
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
+
+interface ResultadoAnalise {
+    classificacao_ia?: string;
+    resumo_ia?: string;
+    error?: string;
+}
 
 export default function TriagemForm() {
     const [tipoImovel, setTipoImovel] = useState('');
-    const [urgencia, setUrgencia] = useState('');
     const [desqualificado, setDesqualificado] = useState(false);
     
     // Status do form
     const [loading, setLoading] = useState(false);
-    const [resultado, setResultado] = useState<any>(null);
+    const [resultado, setResultado] = useState<ResultadoAnalise | null>(null);
 
     const checkDesqualificacao = (valor: string) => {
-        setUrgencia(valor);
         if (valor === 'Apenas o orçamento mais barato') {
             setDesqualificado(true);
         } else {
@@ -35,10 +39,11 @@ export default function TriagemForm() {
                 body: formData
             });
             const data = await res.json();
+            if (data.error) throw new Error(data.error);
             setResultado(data);
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
-            alert("Ocorreu um erro ao enviar o formulário. Tente novamente.");
+            alert(`Ocorreu um erro: ${error.message || 'Tente novamente.'}`);
         } finally {
             setLoading(false);
         }
@@ -109,10 +114,11 @@ export default function TriagemForm() {
                                 <select 
                                     name="urgencia" 
                                     required 
+                                    defaultValue=""
                                     className="w-full bg-[#161F30] border border-white/10 rounded-lg p-3 text-white focus:border-blue-500 outline-none"
                                     onChange={(e) => checkDesqualificacao(e.target.value)}
                                 >
-                                    <option value="" disabled selected>Selecione...</option>
+                                    <option value="" disabled>Selecione...</option>
                                     <option value="Falha crítica de segurança / Parada total">Falha crítica (Curto-circuito, parada total)</option>
                                     <option value="Planejamento e reforma futura">Planejamento / Reforma estruturada</option>
                                     <option value="Apenas o orçamento mais barato">Preciso apenas do orçamento mais barato</option>
