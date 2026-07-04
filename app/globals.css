@@ -51,6 +51,12 @@ body {
     font-size: 16px;
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
+}
+
+html {
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* Scrollbar Customization */
@@ -74,6 +80,7 @@ body {
     max-width: var(--container-width);
     margin: 0 auto;
     padding: 0 24px;
+    box-sizing: border-box;
 }
 
 /* Typography & Visual Elements */
@@ -82,6 +89,9 @@ h1, h2, h3, h4 {
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.2;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 .text-gradient {
@@ -126,6 +136,9 @@ h1, h2, h3, h4 {
     text-decoration: none;
     gap: 8px;
     border: none;
+    box-sizing: border-box;
+    max-width: 100%;
+    white-space: nowrap;
 }
 
 .btn-primary {
@@ -275,6 +288,9 @@ h1, h2, h3, h4 {
     display: flex;
     align-items: center;
     overflow: hidden;
+    max-width: 100vw;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .hero-bg-glow {
@@ -295,6 +311,14 @@ h1, h2, h3, h4 {
     align-items: center;
     position: relative;
     z-index: 2;
+    width: 100%;
+}
+
+.hero-content {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    word-break: break-word;
 }
 
 .badge-tech {
@@ -306,6 +330,8 @@ h1, h2, h3, h4 {
     padding: 6px 16px;
     border-radius: 100px;
     margin-bottom: 24px;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .badge-text {
@@ -313,6 +339,8 @@ h1, h2, h3, h4 {
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--color-primary-hover);
+    white-space: normal;
+    text-align: left;
 }
 
 .hero-title {
@@ -1133,12 +1161,52 @@ h1, h2, h3, h4 {
         transform: rotate(-45deg) translate(6px, -7px);
     }
     
+    .section-title {
+        font-size: 2rem;
+    }
+    
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.25rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .hero-actions .btn {
+        width: 100%;
+        white-space: normal;
+        text-align: center;
+        padding: 14px 20px;
+    }
+
+    /* Prevent any single element from being wider than viewport */
+    * {
+        max-width: 100vw;
+        box-sizing: border-box;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 24px;
+    }
+    
+    .service-card {
+        padding: 24px;
     }
     
     .services-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .calculator-box {
+        padding: 24px;
+        gap: 32px;
+    }
+    
+    .calculator-summary {
+        padding: 20px;
     }
     
     .property-types {
@@ -1149,10 +1217,73 @@ h1, h2, h3, h4 {
         grid-template-columns: 1fr;
     }
     
+    .contact-card, .instagram-cta {
+        padding: 32px 24px;
+    }
+    
     .footer-content {
         flex-direction: column;
         text-align: center;
         gap: 16px;
     }
+
+    /* Container padding reduction on very small screens */
+    .container {
+        padding: 0 16px;
+    }
+
+    /* Hero visual panel hidden on very small screens to avoid overflow */
+    .hero-visual {
+        display: none;
+    }
+
+    /* Hero stats in a grid instead of flex for better centering */
+    .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        text-align: center;
+    }
+
+    .stat-item {
+        align-items: center;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .section-header {
+        margin-bottom: 36px;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
 }
 
+/* Extra small screens (< 400px) */
+@media (max-width: 400px) {
+    .hero-title {
+        font-size: 1.875rem;
+    }
+
+    .hero-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-item {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .badge-tech {
+        border-radius: 12px;
+        padding: 8px 14px;
+    }
+}
