@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
+import AnalyticsTracker from "@/components/AnalyticsTracker";
 
 const inter = Inter({
   variable: "--font-body",
@@ -27,7 +29,13 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${inter.variable} ${outfit.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <Suspense fallback={null}>
+          <AnalyticsTracker />
+        </Suspense>
+        {children}
+      </body>
     </html>
   );
 }
+
